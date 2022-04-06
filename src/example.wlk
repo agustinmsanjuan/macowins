@@ -1,10 +1,11 @@
 class Prenda {
 	var estado
 	var property precioBase
+	var property tipo
 	method precio() = self.precioBase() - estado.efecto(self.precioBase())
 	}
 
-class Nueva {
+object nueva {
 	method efecto(precioBase) = 0
 }
 
@@ -13,31 +14,32 @@ class Promocion {
 	method efecto(precioBase) = descuento 
 }
 
-class Liquidacion {
+object liquidacion {
 	method efecto(precioBase) = precioBase * 0.5
 }
 
-//object registrador {
-//	var ventas = []
-	// suma de ganancias de ventas = ganancia total
-//}
+class Dia {
+	var ventas = []
+	var fecha
+	method gananciaTotal() = ventas.sum{venta => venta.precio()}
+}
 
 class Venta {
-	var fechaDeVenta
+	var dia
 	var metodoPago
 	var prendas = []
 	
-	method ganancia() = metodoPago.efectoMetodoPago(prenda.precio()) // prendas.sum{prenda => prenda.precio()} 
-	 
+	method ganancia() = self.preciosTotales() + metodoPago.efectoMetodoPago(self.preciosTotales())
+	method preciosTotales() = prendas.sum{prenda => prenda.precio()} 
 
 }
 
 class Tarjeta {
 	var cuotas
 	const coeficiente
-	method efectoMetodoPago(precio) = cuotas * coeficiente + 0.01 * precio
+	method efectoMetodoPago(precio) = cuotas * coeficiente + 0.01 * precio //recargo
 }
 
 class Efectivo {
-	method efectoMetodoPago(precio) = precio
+	method efectoMetodoPago(precio) = 0
 }
