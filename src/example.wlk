@@ -2,20 +2,20 @@ class Prenda {
 	var estado
 	var property precioBase
 	var property tipo
-	method precio() = self.precioBase() - estado.efecto(self.precioBase())
+	method precio() = estado.precioAfectado(precioBase)
 	}
 
 object nueva {
-	method efecto(precioBase) = 0
+	method precioAfectado(precioBase) = precioBase
 }
 
 class Promocion {
 	const descuento
-	method efecto(precioBase) = descuento 
+	method precioAfectado(precioBase) = precioBase - descuento 
 }
 
 object liquidacion {
-	method efecto(precioBase) = precioBase * 0.5
+	method precioAfectado(precioBase) = precioBase - (precioBase * 0.5)
 }
 
 class Dia {
