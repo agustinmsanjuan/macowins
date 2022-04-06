@@ -21,15 +21,14 @@ object liquidacion {
 class Dia {
 	var ventas = []
 	var fecha
-	method gananciaTotal() = ventas.sum{venta => venta.precio()}
+	method gananciaTotal() = ventas.sum{venta => venta.ganancia()}
 }
 
 class Venta {
-	var dia
 	var metodoPago
 	var prendas = []
 	
-	method ganancia() = self.preciosTotales() + metodoPago.efectoMetodoPago(self.preciosTotales())
+	method ganancia() = self.preciosTotales() + metodoPago.recargo(self.preciosTotales())
 	method preciosTotales() = prendas.sum{prenda => prenda.precio()} 
 
 }
@@ -37,9 +36,9 @@ class Venta {
 class Tarjeta {
 	var cuotas
 	const coeficiente
-	method efectoMetodoPago(precio) = cuotas * coeficiente + 0.01 * precio //recargo
+	method recargo(precio) = cuotas * coeficiente + 0.01 * precio //recargo
 }
 
 class Efectivo {
-	method efectoMetodoPago(precio) = 0
+	method recargo(precio) = 0
 }
