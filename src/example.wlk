@@ -1,7 +1,7 @@
 class Prenda {
 	var estado
 	var property precioBase
-	var property tipo
+	const property tipo
 	method precio() = estado.precioAfectado(precioBase)
 	}
 
