@@ -29,6 +29,7 @@ class Venta {
 	var prendas = []
 	
 	method ganancia() = self.preciosTotales() + metodoPago.recargo(self.preciosTotales())
+	// method ganancia() = metodoPago.recargo(self.preciosTotales())
 	method preciosTotales() = prendas.sum{prenda => prenda.precio()} 
 
 }
@@ -36,9 +37,11 @@ class Venta {
 class Tarjeta {
 	var cuotas
 	const coeficiente
-	method recargo(precio) = cuotas * coeficiente + 0.01 * precio //recargo
+	method recargo(precio) = cuotas * coeficiente + 0.01 * precio
+	// method recargo(precio) = cuotas * coeficiente + 1.01 * precio 
 }
 
 class Efectivo {
 	method recargo(precio) = 0
+	// method recargo(precio) = precio
 }
